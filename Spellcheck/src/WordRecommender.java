@@ -1,5 +1,7 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class WordRecommender {
@@ -11,49 +13,101 @@ public class WordRecommender {
 	
 	String word1;
 	String word2;
+	ArrayList<String> WordsFromDictionary;
+	ArrayList<String> wordsFromUserFile;
 	
-	//Constructor for taking in a file 
-	public WordRecommender (String fileName) {
-		String userFileName = fileName;
+	//Constructor for taking dictionary File
+	public WordRecommender (String fileName, String checkFile) {
+		//create objective
+		String userDictionary = fileName;
+		String userCheckFile = checkFile;
+		//set as new
+		File userFile = new File(userDictionary);
 		
-		
-		File userFile = new File(userFileName);
 		try {
-			//try to do stuff
+			//create ArrayList wordsFromUserFile
 			Scanner fileScanner = new Scanner(userFile);
-			while (fileScanner.hasNextLine()) {
-				System.out.println(fileScanner.nextLine());
+			while (fileScanner.hasNextLine()) { //This would need to be changed
+				wordsFromUserFile.add(fileScanner.nextLine());
 			}
 		} catch (FileNotFoundException e) {
 			System.out.println("Invalid file");
 			e.printStackTrace();
+			
 		}
 		
-		
-		
-		
+		/**
+		 * Once ArrayList<String> for userDictionary is created, now create 
+		 * a ArrayList for all words to check spelling
+		 */
 	
+		//need method to change entire file to stringString
+		String listOfPpl = "arv, aash, dawn";
+		
+		//this allows you to read csv files 
+		String[] wordsFromUserFile = listOfPpl.split(" "); //use Array or ArrayList?
+		System.out.println(Arrays.toString(wordsFromUserFile));
 		
 		
-	//get similarities and return average of the two words
-	//maybe use 2 forloops
-	public double getSimilarity (String word1, String word2) {
-	
-	double leftSimilarity = 0;
-	double rightSimilarity = 0;
-	
-	double numbers = 2.9;
-	
-	return numbers;
+		//created a handle/file object
+		File f = new File(userCheckFile);
+		try {
+			//try to do stuff
+			Scanner fileScanner = new Scanner(f);
+			//need to ask about this
+			while (fileScanner.hasNextLine()) {
+				System.out.println(fileScanner.nextLine());
+			}
+		} catch (FileNotFoundException e) {
+			System.out.println("bad file name");
+			e.printStackTrace();
+		}
+	}
+		
 		
 	}
-	}
+
+	
+
+//	String str = "2346512aa";
+//	int sum = 0;
+//
+//	for(int i = 0; i <= str.length(); i++){
+//		try{
+//			sum += Integer.parseInt(str.charAt(i) + "");
+//		}catch(IndexOutOfBoundsException ioe){
+//			System.out.print("Regular!  ");
+//			sum -= 1;
+//		}catch(NumberFormatException nfe){
+//			System.out.print("Yikes!  ");
+//			sum -= 1;
+//		}finally{
+//			System.out.println("i= " + i);
+//			sum += 1;
+//		}
+//	}
+//	System.out.println("Sum: " + sum);
+//} //main
+//class
+		
+	
+		
+		
+//	//get similarities and return average of the two words
+//	//maybe use 2 forloops
+//	public double getSimilarity (String word1, String word2) {
+//	
+//	double leftSimilarity = 0;
+//	double rightSimilarity = 0;
+//	
+//	double numbers = 2.9;
+//	
+//	return numbers;
+//		
+//	}
+//	}
 	
 	
-	
-	
-	
-}
 
 
 
