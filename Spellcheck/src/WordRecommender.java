@@ -56,55 +56,41 @@ public class WordRecommender {
 			e.printStackTrace();
 		}
 	}
+	
+	public double getSimilarity (String word1, String word2) {
+	
+	this.word1 = word1;
+	this.word2 = word2;
+	double leftSim = 0;
+	double rightSim = 0;
+	int b = 0;
+	
+	int diff = word1.length() - word2.length();
+	
+	if (diff >= 0) {
+		b = word1.length();
+	}
+	if (diff < 0) {
+		b = word2.length();
+	}
+	
+	for (int i = 0; i < b; i++) {
+		if (word1.charAt(i) == word1.charAt(i)) {
+			leftSim++;
+		}
+	}
+	
+	for (int i = -1; i > -b - 1; i--) {
+		if (word1.charAt(i) == word1.charAt(i)) {
+			rightSim++;
+		}
+	}
+	
+	double average = (rightSim + leftSim)/2;
+	return average;
 
-
+	}
 }
-
-
-
-//	String str = "2346512aa";
-//	int sum = 0;
-//
-//	for(int i = 0; i <= str.length(); i++){
-//		try{
-//			sum += Integer.parseInt(str.charAt(i) + "");
-//		}catch(IndexOutOfBoundsException ioe){
-//			System.out.print("Regular!  ");
-//			sum -= 1;
-//		}catch(NumberFormatException nfe){
-//			System.out.print("Yikes!  ");
-//			sum -= 1;
-//		}finally{
-//			System.out.println("i= " + i);
-//			sum += 1;
-//		}
-//	}
-//	System.out.println("Sum: " + sum);
-//} //main
-//class
-
-
-
-
-//	//get similarities and return average of the two words
-//	//maybe use 2 forloops
-//	public double getSimilarity (String word1, String word2) {
-//	
-
-// one forloop increment up (left to right)
-// one forloop decrement down (right to left)
-
-//	double leftSimilarity = 0;
-//	double rightSimilarity = 0;
-//	
-//	double numbers = 2.9;
-//	
-//	return numbers;
-//		
-//	}
-//	}
-
-
 
 
 
