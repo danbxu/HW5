@@ -97,6 +97,10 @@ public class WordRecommender {
 //	//maybe use 2 forloops
 //	public double getSimilarity (String word1, String word2) {
 //	
+
+// one forloop increment up (left to right)
+// one forloop decrement down (right to left)
+
 //	double leftSimilarity = 0;
 //	double rightSimilarity = 0;
 //	
