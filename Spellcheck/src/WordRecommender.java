@@ -90,7 +90,40 @@ public class WordRecommender {
 	return average;
 
 	}
+	
+//	public static void main(String[] args) {
+//		String hi = "hi";
+//		String [] hello = hi.split("");
+//		System.out.println(Arrays.toString(hello));
+//		
+//		
+//	}
+	
+	public ArrayList<String> getWordSuggestions(String word, int tolerance, double commonPercent, int topN) {
+//		this.word = word;
+//		this.tolerance = tolerance;
+//		this.commonPercent = commonPercent;
+//		this.topN = topN;
+		int candidateWordMax = word.length() + tolerance; 
+		int candidateWordMin = word.length() - tolerance; 
+		
+		String[] incorrectWord = word.split("");
+		ArrayList<String> set1 = new ArrayList<>(); 
+		set1.add(incorrectWord[0]);
+		
+		for (int i = 0; i < incorrectWord.length; i++) {
+			for (int j = 0; j < incorrectWord.length; j++) {
+				if(i != j && incorrectWord[i] != incorrectWord[j]) {
+					set1.add(incorrectWord[j]);
+				}
+			}
+		
+		}
+		
+		
+	}
 }
+	
 
 
 
