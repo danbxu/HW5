@@ -155,13 +155,17 @@ public class WordRecommender {
 				
 				if (comPercent >= commonPercent) {
 					meetComPercent.add(closeWords.get(i));
-					ComPercentages.add(commonPercent);
+				//	ComPercentages.add(commonPercent);
 				}
 
 			}
 			set2.clear();
 		}
 		
+		for (int i = 0; i < meetComPercent.size(); i++ ) {
+			getSimilarity(word, meetComPercent.get(0));
+			
+		}
 		
 		
 		
