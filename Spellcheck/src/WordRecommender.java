@@ -96,6 +96,8 @@ public class WordRecommender {
 //		
 //	}
 	
+	
+	
 	public ArrayList<String> getWordSuggestions(String word, int tolerance, double commonPercent, int topN) {
 //		this.word = word;
 //		this.tolerance = tolerance;
@@ -106,7 +108,10 @@ public class WordRecommender {
 		
 		String[] incorrectWord = word.split("");
 		ArrayList<String> set1 = new ArrayList<>(); 
-		//set1.add(incorrectWord[0]);
+		ArrayList<String> set2 = new ArrayList<>();
+		ArrayList<String> closeWords = new ArrayList<>();
+		ArrayList<String> meetComPercent = new ArrayList<>();
+		ArrayList<Double> ComPercentages = new ArrayList<>();
 		
 		for (int i = 0; i < incorrectWord.length; i++) {
 			if (!set1.contains(incorrectWord[i])) {
@@ -114,14 +119,52 @@ public class WordRecommender {
 			}
 		}
 		
-//		for (int i = 0; i < incorrectWord.length; i++) {
-//			for (int j = 0; j < incorrectWord.length; j++) {
-//				if(i != j && incorrectWord[i] != incorrectWord[j]) {
-//					set1.add(incorrectWord[i]);
-//				}
-//			}
-//		
-//		}
+		for (int i = 0; i < wordsFromDictionary.size(); i++) {
+			if (wordsFromDictionary.get(i).length() >= candidateWordMin && wordsFromDictionary.get(i).length() <= candidateWordMax) {
+				closeWords.add(wordsFromDictionary.get(i));
+			}
+		}
+
+		for (int i = 0; i < closeWords.size(); i++) {
+			
+			for (int j= 0; j < closeWords.get(i).length(); j++) {
+				if (!set2.contains(incorrectWord[i])) {
+					set2.add(incorrectWord[i]);
+				}
+				
+				ArrayList <String> intersect = new ArrayList<>();
+				ArrayList <String> union = new ArrayList<>();
+
+				for (int k = 0; k < set1.size(); k++) {
+					union.add(set1.get(k));
+				}
+				for (int k = 0; k < set2.size(); k++) {
+					if (!union.contains(set2.get(k))) {
+						union.add(set2.get(k));
+					}
+				}
+				
+				for (int k = 0; k < set1.size(); k++) {
+					for (int l = 0; l < set2.size(); l++) {
+						if (set1.get(k) == set2.get(l)) {
+							intersect.add(set1.get(k));
+						}
+					}
+				}
+				double comPercent = intersect.size()/union.size();
+				
+				if (comPercent >= commonPercent) {
+					meetComPercent.add(closeWords.get(i));
+					ComPercentages.add(commonPercent);
+				}
+
+			}
+			set2.clear();
+		}
+		
+		
+		
+		
 		return set1; //need to delete 
 		
 		
