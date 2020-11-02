@@ -178,10 +178,17 @@ public class WordRecommender {
 		}
 		return topNWords; 
 		
-		
 	}
+	
 	public String prettyPrint (ArrayList <String> list) {
-		return "1. " + list.get(0) + "\n2. " + list.get(1) + "\n3. " + list.get(2);
+		String a = "";
+		String pretty = "";
+		for (int i = 0; i < list.size(); i++) {
+			a = (i + 1) + ". " + list.get(i) + "\n";
+			pretty += a;
+
+		}
+		return pretty;
 	}
 	
 	
@@ -190,9 +197,14 @@ public class WordRecommender {
 		WordRecommender a = new WordRecommender();
 		ArrayList <String> test = new ArrayList<String>();
 		test.add("rick");
+		test.add("morty");
+		test.add("mr.me");
 		test.add("rick");
-		test.add("rick");
-		System.out.println(a.getWordSuggestions("mississippi", 4, 75.0, 3));
+		test.add("morty");
+		test.add("mr.me");
+		
+		System.out.println(a.prettyPrint(test));
+//		System.out.println(a.getWordSuggestions("mississippi", 4, 75.0, 3));
 		
 		//System.out.println(a.prettyPrint(test));
 	
