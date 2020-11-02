@@ -106,16 +106,22 @@ public class WordRecommender {
 		
 		String[] incorrectWord = word.split("");
 		ArrayList<String> set1 = new ArrayList<>(); 
-		set1.add(incorrectWord[0]);
+		//set1.add(incorrectWord[0]);
 		
 		for (int i = 0; i < incorrectWord.length; i++) {
-			for (int j = 0; j < incorrectWord.length; j++) {
-				if(i != j && incorrectWord[i] != incorrectWord[j]) {
-					set1.add(incorrectWord[j]);
-				}
+			if (!set1.contains(incorrectWord[i])) {
+				set1.add(incorrectWord[i]);
 			}
-		
 		}
+		
+//		for (int i = 0; i < incorrectWord.length; i++) {
+//			for (int j = 0; j < incorrectWord.length; j++) {
+//				if(i != j && incorrectWord[i] != incorrectWord[j]) {
+//					set1.add(incorrectWord[i]);
+//				}
+//			}
+//		
+//		}
 		return set1; //need to delete 
 		
 		
@@ -126,16 +132,17 @@ public class WordRecommender {
 	
 	
 	
-//	public static void main(String[] args) {
-//		WordRecommender a = new WordRecommender();
-//		ArrayList <String> test = new ArrayList<String>();
-//		test.add("rick");
-//		test.add("rick");
-//		test.add("rick");
-//		
-//		System.out.println(a.prettyPrint(test));
-//	
+	public static void main(String[] args) {
+		WordRecommender a = new WordRecommender();
+		ArrayList <String> test = new ArrayList<String>();
+		test.add("rick");
+		test.add("rick");
+		test.add("rick");
+		System.out.println(a.getWordSuggestions("mississippi", 4, 75.0, 3));
 		
+		//System.out.println(a.prettyPrint(test));
+	
+	}		
 		
 		
 }
