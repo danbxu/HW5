@@ -5,6 +5,8 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class WordRecommender {
+	
+	
 
 	String filename; //refers to the file 
 	//containing a dictionary of correct words
@@ -38,10 +40,10 @@ public class WordRecommender {
 	public void createFileToCheck (String checkFile) {
 		String userCheckFile = checkFile; //unit test
 		
-		File f = new File(userCheckFile); //unit test
+		File wordsToCheck= new File(userCheckFile); //unit test
 		
 		try {
-			Scanner fileScanner = new Scanner(f);
+			Scanner fileScanner = new Scanner(wordsToCheck);
 			
 			while (fileScanner.hasNext()) {
 				wordsFromUserFile.add(fileScanner.next());
@@ -54,10 +56,10 @@ public class WordRecommender {
 	
 	public double getSimilarity (String word1, String word2) {
 	
-	this.word1 = word1;
-	this.word2 = word2;
-	double leftSim = 0;
-	double rightSim = 0;
+	this.word1 = word1; //unit test
+	this.word2 = word2; //unit test
+	double leftSim = 0; //unit test
+	double rightSim = 0; //unit test
 	int b = 0;
 	
 	int diff = word1.length() - word2.length();
@@ -114,9 +116,28 @@ public class WordRecommender {
 			}
 		
 		}
+		return set1; //need to delete 
 		
 		
 	}
+	public String prettyPrint (ArrayList <String> list) {
+		return "1. " + list.get(0) + "\n2. " + list.get(1) + "\n3. " + list.get(2);
+	}
+	
+	
+	
+//	public static void main(String[] args) {
+//		WordRecommender a = new WordRecommender();
+//		ArrayList <String> test = new ArrayList<String>();
+//		test.add("rick");
+//		test.add("rick");
+//		test.add("rick");
+//		
+//		System.out.println(a.prettyPrint(test));
+//	
+		
+		
+		
 }
 	
 
