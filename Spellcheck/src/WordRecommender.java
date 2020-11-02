@@ -17,37 +17,32 @@ public class WordRecommender {
 	ArrayList<String> wordsFromUserFile;
 
 	//Constructor for taking dictionary File
-	public WordRecommender (String fileName, String checkFile) {
-		//create objective
-		String userDictionary = fileName;
-		String userCheckFile = checkFile;
-		//set as new
-		File userFile = new File(userDictionary);
-
+	public void createDFile (String fileName) {
+	
+		String userDictionary = fileName; //unit test
+	
+		File userFile = new File(userDictionary); //unit test
 		try {
 			//create ArrayList wordsFromUserFile
 			Scanner fileScanner = new Scanner(userFile);
-			while (fileScanner.hasNextLine()) { //This would need to be changed
+			while (fileScanner.hasNextLine()) { 
 				wordsFromDictionary.add(fileScanner.nextLine());
 			}
 		} catch (FileNotFoundException e) {
 			System.out.println("Invalid file");
-			e.printStackTrace();
-
+			e.printStackTrace(); 
 		}
-
-		/**
-		 * Once ArrayList<String> for userDictionary is created, now create 
-		 * a ArrayList for all words to check spelling
-		 */
-		//System.out.println(Arrays.toString(wordsFromUserFile))
-
-		//created a handle/file object
-		File f = new File(userCheckFile);
+	}
+	
+	//Constructor for taking words to check
+	public void createFileToCheck (String checkFile) {
+		String userCheckFile = checkFile; //unit test
+		
+		File f = new File(userCheckFile); //unit test
+		
 		try {
-			//try to do stuff
 			Scanner fileScanner = new Scanner(f);
-			//need to ask about this
+			
 			while (fileScanner.hasNext()) {
 				wordsFromUserFile.add(fileScanner.next());
 			}
