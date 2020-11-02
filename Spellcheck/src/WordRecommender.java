@@ -162,14 +162,21 @@ public class WordRecommender {
 			set2.clear();
 		}
 		
-		for (int i = 0; i < meetComPercent.size(); i++ ) {
-			getSimilarity(word, meetComPercent.get(0));
-			
+		//double sim1 = getSimilarity(word, meetComPercent.get(0));
+		String topWord = meetComPercent.get(0);
+		ArrayList <String> topNWords = new ArrayList<>();
+		for (int j = 0; j < topN; j++) {
+			for (int i = 0; i < meetComPercent.size(); i++ ) {
+				double sim1 = getSimilarity(word, topWord);
+				double sim2 = getSimilarity(word, meetComPercent.get(i+1));
+				if (sim2 > sim1) {
+					topWord = meetComPercent.get(i+1);
+				}
+			}
+			topNWords.add(topWord);
+			meetComPercent.remove(topWord);
 		}
-		
-		
-		
-		return set1; //need to delete 
+		return topNWords; 
 		
 		
 	}
