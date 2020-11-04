@@ -15,12 +15,13 @@ public class WordRecommender {
 
 	String word1;
 	String word2;
-	ArrayList<String> wordsFromDictionary;
-	ArrayList<String> wordsFromUserFile;
+
+	
 
 	//Constructor for taking dictionary File
 	public ArrayList<String> createDFile (String fileName) {
 	
+		ArrayList<String> wordsFromDictionary = new ArrayList<>();
 		String userDictionary = fileName; //unit test
 	
 		File userFile = new File(userDictionary); //unit test
@@ -39,6 +40,7 @@ public class WordRecommender {
 	
 	//Constructor for taking words to check
 	public ArrayList<String> createFileToCheck (String checkFile) {
+		ArrayList<String> wordsFromUserFile = new ArrayList<String>();
 		String userCheckFile = checkFile; //unit test
 		
 		File wordsToCheck= new File(userCheckFile); //unit test
@@ -105,6 +107,10 @@ public class WordRecommender {
 //		this.tolerance = tolerance;
 //		this.commonPercent = commonPercent;
 //		this.topN = topN;
+	
+		ArrayList<String> wordsFromDictionary = new ArrayList<String>();
+		ArrayList<String> wordsFromUserFile = new ArrayList<String>();
+		
 		int candidateWordMax = word.length() + tolerance; 
 		int candidateWordMin = word.length() - tolerance; 
 		
@@ -114,6 +120,9 @@ public class WordRecommender {
 		ArrayList<String> closeWords = new ArrayList<>();
 		ArrayList<String> meetComPercent = new ArrayList<>();
 		ArrayList<Double> ComPercentages = new ArrayList<>();
+		
+		
+		
 		
 		for (int i = 0; i < incorrectWord.length; i++) {
 			if (!set1.contains(incorrectWord[i])) {
