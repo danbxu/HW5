@@ -71,20 +71,20 @@ public class WordRecommender {
 	int diff = word1.length() - word2.length();
 	
 	if (diff >= 0) {
-		b = word1.length();
+		b = word2.length();
 	}
 	if (diff < 0) {
-		b = word2.length();
+		b = word1.length();
 	}
 	
 	for (int i = 0; i < b; i++) {
-		if (word1.charAt(i) == word1.charAt(i)) {
+		if (word1.charAt(i) == word2.charAt(i)) {
 			leftSim++;
 		}
 	}
 	
-	for (int i = -1; i > -b - 1; i--) {
-		if (word1.charAt(i) == word1.charAt(i)) {
+	for (int i = -1; i < -b - 1; i--) {
+		if (word1.charAt(i) == word2.charAt(i)) {
 			rightSim++;
 		}
 	}
@@ -107,7 +107,8 @@ public class WordRecommender {
 	public ArrayList<String> getWordSuggestions(String word, int tolerance, double commonPercent, int topN) {
 //		this.word = word;
 //		this.tolerance = tolerance;
-//		this.commonPercent = commonPercent;
+		int listLength = topN;
+		double commonPercentage = commonPercent;
 //		this.topN = topN;
 	
 		WordRecommender a = new WordRecommender();
@@ -123,7 +124,12 @@ public class WordRecommender {
 		ArrayList<String> set2 = new ArrayList<>();
 		ArrayList<String> closeWords = new ArrayList<>();
 		ArrayList<String> meetComPercent = new ArrayList<>();
+		ArrayList<String> test = new ArrayList<>();
+		ArrayList<Double> test1 = new ArrayList<>();
 		ArrayList<Double> ComPercentages = new ArrayList<>();
+		String top = null;
+		double test2 = 0;
+		int test3 = 0;
 		
 		
 		
@@ -134,85 +140,129 @@ public class WordRecommender {
 			}
 		}
 		
+		
 		for (int i = 0; i < newFileD.size(); i++) {
-			if (newFileD.get(i).length() >= candidateWordMin && newFileD.get(i).length() <= candidateWordMax) {
+			if ((newFileD.get(i).length() >= candidateWordMin) && (newFileD.get(i).length() <= candidateWordMax)) {
 				closeWords.add(newFileD.get(i));
 			}
 		}
 
 		for (int i = 0; i < closeWords.size(); i++) {
-			String[] newSet = new String[closeWords.get(i).length()]; //added new set for words 
-			
-			for (int j= 0; j < closeWords.get(i).length(); j++) {
-				if (!set2.contains(newSet[i])) { //changed from i 
-					set2.add(newSet[i]); // changed from i 
-				}
-				
-				ArrayList <String> intersect = new ArrayList<>();
-				ArrayList <String> union = new ArrayList<>();
-
-				for (int k = 0; k < set1.size(); k++) {
-					union.add(set1.get(k));
-				}
-				for (int k = 0; k < set2.size(); k++) {
-					if (!union.contains(set2.get(k))) {
-						union.add(set2.get(k));
-					}
-				}
-				
-				for (int k = 0; k < set1.size(); k++) {
-					for (int l = 0; l < set2.size(); l++) {
-						if (set1.get(k) == set2.get(l)) {
-							intersect.add(set1.get(k));
-						}
-					}
-				}
-				double comPercent = intersect.size()/union.size();
-				
-				if (comPercent >= commonPercent) {   //percentage not adding 
-					meetComPercent.add(closeWords.get(i));
-				//	ComPercentages.add(commonPercent);
-				}
-
-			}
+			//String[] newSet = new String[closeWords.get(i).length()];
+			String[] newSet = closeWords.get(i).split("");
+			//added new set for words 
 			set2.clear();
+			for (int j = 0; j < newSet.length; j++) {
+				//				set2.clear();
+				if (!set2.contains(newSet[j])) { //changed from i 
+					set2.add(newSet[j]); // changed from i 
+				}
+			
+
+
+
+
+			ArrayList <String> intersect = new ArrayList<>();
+			ArrayList <String> union = new ArrayList<>();
+
+			for (int k = 0; k < set1.size(); k++) {
+				union.add(set1.get(k));
+			}
+			for (int k = 0; k < set2.size(); k++) {
+				if (!union.contains(set2.get(k))) {
+					union.add(set2.get(k));
+				}
+			}
+
+
+			for (int k = 0; k < set1.size(); k++) {
+				for (int l = 0; l < set2.size(); l++) {
+					if (set1.get(k).equals(set2.get(l)) && !intersect.contains(set1.get(k))) {
+						intersect.add(set1.get(k));
+					}
+				}
+			}
+			
+			double intLength = intersect.size();
+			double unLength = union.size();
+			
+			//				return intersect;
+
+
+			double comPercent = intLength/unLength;
+//			test2 = comPercent;
+
+			if (comPercent >= commonPercentage) {   //percentage not adding 
+				if (!meetComPercent.contains(closeWords.get(i))) {
+					meetComPercent.add(closeWords.get(i));
+//					ComPercentages.add(commonPercent);
+//				}
+				}
+			}
+
+
+
+
+		
+//		test = meetComPercent;
+//		return test;
+
+
+	
+	}
 		}
+
+
+
+
 		
 		//double sim1 = getSimilarity(word, meetComPercent.get(0));
+		
+		
 		String topWord = meetComPercent.get(0);
-		ArrayList <String> topNWords = new ArrayList<>();
-		for (int j = 0; j < topN; j++) {
-			for (int i = 0; i < meetComPercent.size(); i++ ) {
+
+		ArrayList <String> topNWords = new ArrayList<String>();
+		for (int j = 0; j < listLength; j++) {
+			for (int p = 0; p < meetComPercent.size() - 1; p++) {
 				double sim1 = getSimilarity(word, topWord);
-				double sim2 = getSimilarity(word, meetComPercent.get(i+1));
+				double sim2 = getSimilarity(word, meetComPercent.get(p+1));
 				if (sim2 > sim1) {
-					topWord = meetComPercent.get(i+1);
+					topWord = meetComPercent.get(p+1);
 				}
 			}
-			topNWords.add(topWord);
-			meetComPercent.remove(topWord);
+			if (!topNWords.contains(topWord)) {
+				topNWords.add(topWord);
+				meetComPercent.remove(topWord);
+			}
 		}
-		return topNWords; 
+//		for (int i = 0; i < topNWords.size(); i++) {
+//			
+//		}
 		
+		test = topNWords;
+		return test;
 		
 	}
+
+
+
 	public String prettyPrint (ArrayList <String> list) {
 		return "1. " + list.get(0) + "\n2. " + list.get(1) + "\n3. " + list.get(2);
 	}
 	
 	
 	
-	public static void main(String[] args) {
-		WordRecommender a = new WordRecommender();
-		ArrayList <String> test = new ArrayList<String>();
-		test.add("rick");
-		test.add("rick");
-		test.add("rick");
-		System.out.println(a.getWordSuggestions("mississippi", 4, 75.0, 3));
-		
-		//System.out.println(a.prettyPrint(test));
-	
-	}		
+//	public static void main(String[] args) {
+//		WordRecommender a = new WordRecommender();
+//		ArrayList <String> test = new ArrayList<String>();
+//		test.add("rick");
+//		test.add("rick");
+//		test.add("rick");
+//		System.out.println(a.getWordSuggestions("mississippi", 4, 75.0, 3));
+//		
+//		//System.out.println(a.prettyPrint(test));
+//	
+//	}		
 		
 		
 }
