@@ -15,7 +15,9 @@ public class WordRecommender {
 
 	String word1;
 	String word2;
-
+	
+//	static ArrayList<String> wordsFromDictionary;
+//	static ArrayList<String> wordsFromUserFile;
 	
 
 	//Constructor for taking dictionary File
@@ -108,8 +110,10 @@ public class WordRecommender {
 //		this.commonPercent = commonPercent;
 //		this.topN = topN;
 	
-		ArrayList<String> wordsFromDictionary = new ArrayList<String>();
-		ArrayList<String> wordsFromUserFile = new ArrayList<String>();
+		WordRecommender a = new WordRecommender();
+		ArrayList <String> newFileD = a.createDFile("engDictionary.txt");
+
+		
 		
 		int candidateWordMax = word.length() + tolerance; 
 		int candidateWordMin = word.length() - tolerance; 
@@ -130,17 +134,18 @@ public class WordRecommender {
 			}
 		}
 		
-		for (int i = 0; i < wordsFromDictionary.size(); i++) {
-			if (wordsFromDictionary.get(i).length() >= candidateWordMin && wordsFromDictionary.get(i).length() <= candidateWordMax) {
-				closeWords.add(wordsFromDictionary.get(i));
+		for (int i = 0; i < newFileD.size(); i++) {
+			if (newFileD.get(i).length() >= candidateWordMin && newFileD.get(i).length() <= candidateWordMax) {
+				closeWords.add(newFileD.get(i));
 			}
 		}
 
 		for (int i = 0; i < closeWords.size(); i++) {
+			String[] newSet = new String[closeWords.get(i).length()]; //added new set for words 
 			
 			for (int j= 0; j < closeWords.get(i).length(); j++) {
-				if (!set2.contains(incorrectWord[i])) {
-					set2.add(incorrectWord[i]);
+				if (!set2.contains(newSet[i])) { //changed from i 
+					set2.add(newSet[i]); // changed from i 
 				}
 				
 				ArrayList <String> intersect = new ArrayList<>();
@@ -164,7 +169,7 @@ public class WordRecommender {
 				}
 				double comPercent = intersect.size()/union.size();
 				
-				if (comPercent >= commonPercent) {
+				if (comPercent >= commonPercent) {   //percentage not adding 
 					meetComPercent.add(closeWords.get(i));
 				//	ComPercentages.add(commonPercent);
 				}
