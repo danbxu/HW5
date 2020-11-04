@@ -19,7 +19,7 @@ public class WordRecommender {
 	ArrayList<String> wordsFromUserFile;
 
 	//Constructor for taking dictionary File
-	public void createDFile (String fileName) {
+	public ArrayList<String> createDFile (String fileName) {
 	
 		String userDictionary = fileName; //unit test
 	
@@ -34,10 +34,11 @@ public class WordRecommender {
 			System.out.println("Invalid file");
 			e.printStackTrace(); 
 		}
+		return wordsFromDictionary;
 	}
 	
 	//Constructor for taking words to check
-	public void createFileToCheck (String checkFile) {
+	public ArrayList<String> createFileToCheck (String checkFile) {
 		String userCheckFile = checkFile; //unit test
 		
 		File wordsToCheck= new File(userCheckFile); //unit test
@@ -52,6 +53,7 @@ public class WordRecommender {
 			System.out.println("bad file name");
 			e.printStackTrace();
 		}
+		return wordsFromUserFile;
 	}
 	
 	public double getSimilarity (String word1, String word2) {
@@ -178,17 +180,10 @@ public class WordRecommender {
 		}
 		return topNWords; 
 		
+		
 	}
-	
 	public String prettyPrint (ArrayList <String> list) {
-		String a = "";
-		String pretty = "";
-		for (int i = 0; i < list.size(); i++) {
-			a = (i + 1) + ". " + list.get(i) + "\n";
-			pretty += a;
-
-		}
-		return pretty;
+		return "1. " + list.get(0) + "\n2. " + list.get(1) + "\n3. " + list.get(2);
 	}
 	
 	
@@ -197,14 +192,9 @@ public class WordRecommender {
 		WordRecommender a = new WordRecommender();
 		ArrayList <String> test = new ArrayList<String>();
 		test.add("rick");
-		test.add("morty");
-		test.add("mr.me");
 		test.add("rick");
-		test.add("morty");
-		test.add("mr.me");
-		
-		System.out.println(a.prettyPrint(test));
-//		System.out.println(a.getWordSuggestions("mississippi", 4, 75.0, 3));
+		test.add("rick");
+		System.out.println(a.getWordSuggestions("mississippi", 4, 75.0, 3));
 		
 		//System.out.println(a.prettyPrint(test));
 	
