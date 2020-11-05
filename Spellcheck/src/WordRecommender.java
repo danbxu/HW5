@@ -217,7 +217,9 @@ public class WordRecommender {
 			output = (i + 1) + ". " + list.get(i) + "\n";
 			nextOutput = nextOutput + output;
 		}
-		return nextOutput;
+		String toPrint = nextOutput;
+		nextOutput = "";
+		return toPrint;
 	}
 }
 
