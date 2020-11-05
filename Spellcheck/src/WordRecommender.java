@@ -7,9 +7,6 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class WordRecommender {
-
-
-
 	String filename; //refers to the file 
 	//containing a dictionary of correct words
 	//ensure that spellcheck can run with any file name
@@ -123,10 +120,6 @@ public class WordRecommender {
 		double comPercent = 0;
 		int compare = 0;
 
-
-
-
-
 		for (int i = 0; i < incorrectWord.length; i++) {
 			if (!set1.contains(incorrectWord[i])) {
 				set1.add(incorrectWord[i]);
@@ -204,9 +197,7 @@ public class WordRecommender {
 				double sim2 = getSimilarity(word, meetComPercent.get(p+1));
 				if (sim2 > sim1) {
 					topWord = meetComPercent.get(p+1);
-
 				}
-
 			}
 			if (!topNWords.contains(topWord)) {
 				topNWords.add(topWord);

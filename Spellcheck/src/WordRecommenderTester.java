@@ -1,9 +1,6 @@
 import java.util.ArrayList;
 
 public class WordRecommenderTester {
-	
-
-	
 	public static void main(String[] args) {
 		
 		WordRecommender a = new WordRecommender();
@@ -13,5 +10,4 @@ public class WordRecommenderTester {
 		System.out.println(a.prettyPrint(b));
 	
 	}
-
 }
