@@ -18,6 +18,7 @@ public class WordRecommender {
 
 	String word1;
 	String word2;
+	String nextOutput = "";
 
 	//	static ArrayList<String> wordsFromDictionary;
 	//	static ArrayList<String> wordsFromUserFile;
@@ -97,37 +98,16 @@ public class WordRecommender {
 				rightSim++;
 			}
 		}
-
 		double average = (rightSim + leftSim)/2;
 		return average;
 
 	}
 
-	//	public static void main(String[] args) {
-	//		String hi = "hi";
-	//		String [] hello = hi.split("");
-	//		System.out.println(Arrays.toString(hello));
-	//		
-	//		
-	//	}
-
-
 	public ArrayList<String> getWordSuggestions(String word, int tolerance, double commonPercent, int topN) {
-		//		this.word = word;
-		//		this.tolerance = tolerance;
 		int listLength = topN;
 		double commonPercentage = commonPercent;
-		//		this.topN = topN;
-
-
-
 		WordRecommender a = new WordRecommender();
 		ArrayList <String> newFileD = a.createDFile(filename);
-		ArrayList <String> newFileC = a.createFileToCheck(filename2);
-
-
-		//		System.out.println(newFileD);
-		//		System.out.println(newFileC);
 
 		int candidateWordMax = word.length() + tolerance; 
 		int candidateWordMin = word.length() - tolerance; 
@@ -138,19 +118,14 @@ public class WordRecommender {
 		ArrayList<String> closeWords = new ArrayList<>();
 		ArrayList<String> meetComPercent = new ArrayList<>();
 		ArrayList<String> test = new ArrayList<>();
-		ArrayList<String> test1 = new ArrayList<>();
-		ArrayList<String> test5 = new ArrayList<>();
-		ArrayList<String> test3 = new ArrayList<>();
-//		ArrayList<Double> test1 = new ArrayList<>();
-		ArrayList<Double> ComPercentages = new ArrayList<>();
-		String top = null;
-		double test2 = 0;
-		double test7 = 0;
-		double comPercent = 0;
-//		int test3 = 0;
-		
 
-		String[] test4; 
+
+		double comPercent = 0;
+		int compare = 0;
+
+
+
+
 
 		for (int i = 0; i < incorrectWord.length; i++) {
 			if (!set1.contains(incorrectWord[i])) {
@@ -158,26 +133,19 @@ public class WordRecommender {
 			}
 		}
 
-
-
 		for (int i = 0; i < newFileD.size(); i++) {
 			if ((newFileD.get(i).length() >= candidateWordMin) && (newFileD.get(i).length() <= candidateWordMax)) {
 				closeWords.add(newFileD.get(i));
 			}
-
 		}
 
-		System.out.println(Arrays.toString(closeWords.toArray()));
-
 		for (int i = 0; i < closeWords.size(); i++) {
-			//String[] newSet = new String[closeWords.get(i).length()];
 			String[] newSet = closeWords.get(i).split("");
 			//added new set for words 
 			set2.clear();
 			for (int j = 0; j < newSet.length; j++) {
-				//				set2.clear();
-				if (!set2.contains(newSet[j])) { //changed from i 
-					set2.add(newSet[j]); // changed from i 
+				if (!set2.contains(newSet[j])) { 
+					set2.add(newSet[j]); 
 				}
 
 				ArrayList <String> intersect = new ArrayList<>();
@@ -202,97 +170,64 @@ public class WordRecommender {
 
 				double intLength = intersect.size();
 				double unLength = union.size();
-				
-		
-
-				test = union;
-				test1 = intersect;
-				//				return intersect;
 
 				comPercent = intLength/unLength;
-				//			test2 = comPercent;
-				
-				test2 = comPercent;
-				test7 = commonPercentage;
 
-				
-			
-				}
+
+			}
 			if (Double.compare(comPercent, commonPercentage) >= 0) {   //this is including items below the tolerance 
 
-				System.out.println(closeWords.get(i) + " from dictionary"); 
 
 				if (!meetComPercent.contains(closeWords.get(i))) {
 					meetComPercent.add(closeWords.get(i));
-					System.out.println("marker");
 				} 
 			}
 
-
-			
-			System.out.println(test);
-			System.out.println(test1);
-			System.out.println(test2 + ": from word");
-			System.out.println(test7 + ": percent set by user");
-			System.out.println(meetComPercent);
-			System.out.println("****");
-
 		}
 
-		//		test = meetComPercent;
-		//		System.out.println(Arrays.toString(test4));
-		return meetComPercent;
+		if (meetComPercent.size() > listLength) {
+			compare = listLength;
+		}
+		else {
+			compare = meetComPercent.size();
+		}
+
+
+		ArrayList <String> topNWords = new ArrayList<String>();
+		for (int j = 0; j < compare; j++) {
+
+
+			String topWord = meetComPercent.get(0);
+
+			for (int p = 0; p < meetComPercent.size() - 1; p++) {
+				double sim1 = getSimilarity(word, topWord);
+				double sim2 = getSimilarity(word, meetComPercent.get(p+1));
+				if (sim2 > sim1) {
+					topWord = meetComPercent.get(p+1);
+
+				}
+
+			}
+			if (!topNWords.contains(topWord)) {
+				topNWords.add(topWord);
+
+			}
+			meetComPercent.remove(topWord);
+		}
+		test = topNWords;
+		return test;
+
 	}
-
-	//double sim1 = getSimilarity(word, meetComPercent.get(0));
-
-
-	//		String topWord = meetComPercent.get(0);
-	//
-	//		ArrayList <String> topNWords = new ArrayList<String>();
-	//		for (int j = 0; j < listLength; j++) {
-	//			for (int p = 0; p < meetComPercent.size() - 1; p++) {
-	//				double sim1 = getSimilarity(word, topWord);
-	//				double sim2 = getSimilarity(word, meetComPercent.get(p+1));
-	//				if (sim2 > sim1) {
-	//					topWord = meetComPercent.get(p+1);
-	//				}
-	//			}
-	//			if (!topNWords.contains(topWord)) {
-	//				topNWords.add(topWord);
-	//				meetComPercent.remove(topWord);
-	//			}
-	//		}
-	//		for (int i = 0; i < topNWords.size(); i++) {
-	//			
-	//		}
-
-	//		test = topNWords;
-	//		return test;
-
-	//	}
-
-
 
 	public String prettyPrint (ArrayList <String> list) {
-		return "1. " + list.get(0) + "\n2. " + list.get(1) + "\n3. " + list.get(2);
+
+		for (int i = 0; i < list.size(); i++) {
+			String output;
+			output = (i + 1) + ". " + list.get(i) + "\n";
+			nextOutput = nextOutput + output;
+		}
+		return nextOutput;
 	}
-
-
-
-	//	public static void main(String[] args) {
-	//		WordRecommender a = new WordRecommender();
-	//		ArrayList <String> test = new ArrayList<String>();
-	//		test.add("rick");
-	//		test.add("rick");
-	//		test.add("rick");
-	//		System.out.println(a.getWordSuggestions("mississippi", 4, 75.0, 3));
-	//		
-	//		//System.out.println(a.prettyPrint(test));
-	//	
-	//	}		
-
-
 }
 
 
