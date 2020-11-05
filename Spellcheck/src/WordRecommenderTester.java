@@ -7,9 +7,9 @@ public class WordRecommenderTester {
 	public static void main(String[] args) {
 		
 		WordRecommender a = new WordRecommender();
-		ArrayList <String> newFileD = a.createDFile("engDictionary.txt");
-		ArrayList <String> newFileC = a.createDFile("usertocorrect");
-		System.out.println(a.getWordSuggestions("helo", 1, 0.5, 5));
+		ArrayList <String> newFileD = a.createDFile("testdictionary");
+		ArrayList <String> newFileC = a.createFileToCheck("usertocorrect");
+		System.out.println(a.getWordSuggestions("help", 10, 1, 5));
 		
 //		PrintToScreen xy = new PrintToScreen();
 		

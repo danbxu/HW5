@@ -1,4 +1,5 @@
 import java.io.File;
+import java.lang.*;
 import java.io.FileNotFoundException;
 import java.sql.Array;
 import java.util.ArrayList;
@@ -145,6 +146,7 @@ public class WordRecommender {
 		String top = null;
 		double test2 = 0;
 		double test7 = 0;
+		double comPercent = 0;
 //		int test3 = 0;
 		
 
@@ -207,21 +209,23 @@ public class WordRecommender {
 				test1 = intersect;
 				//				return intersect;
 
-				double comPercent = intLength/unLength;
+				comPercent = intLength/unLength;
 				//			test2 = comPercent;
 				
 				test2 = comPercent;
 				test7 = commonPercentage;
-					
 
-				if (comPercent > commonPercentage) {   //this is including items below the tolerance 
-
-					System.out.println(closeWords.get(i) + " from dictionary"); 
-
-					if (!meetComPercent.contains(closeWords.get(i))) {
-						meetComPercent.add(closeWords.get(i));
-					} 
+				
+			
 				}
+			if (Double.compare(comPercent, commonPercentage) >= 0) {   //this is including items below the tolerance 
+
+				System.out.println(closeWords.get(i) + " from dictionary"); 
+
+				if (!meetComPercent.contains(closeWords.get(i))) {
+					meetComPercent.add(closeWords.get(i));
+					System.out.println("marker");
+				} 
 			}
 
 
