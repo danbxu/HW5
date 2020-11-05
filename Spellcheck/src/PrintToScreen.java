@@ -96,4 +96,10 @@ public class PrintToScreen {
 		return newFileC;
 
 	}
+	
+	public static void main(String[] args) {
+		PrintToScreen a = new PrintToScreen();
+		a.correctMis("usertocorrect","engDictionary.txt");
+		
+	}
 }

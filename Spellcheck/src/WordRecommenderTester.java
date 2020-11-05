@@ -1,13 +1,19 @@
 import java.util.ArrayList;
+import java.util.*;
 
 public class WordRecommenderTester {
 	public static void main(String[] args) {
+		Scanner abc = new Scanner(System.in);
 		
-		WordRecommender a = new WordRecommender();
-		ArrayList <String> newFileD = a.createDFile("engDictionary.txt");
-		ArrayList <String> newFileC = a.createFileToCheck("usertocorrect");
-		ArrayList <String> b = a.getWordSuggestions("dence", 0, .8, 20);
-		System.out.println(a.prettyPrint(b));
+		PrintToScreen z = new PrintToScreen();
+		WriteNewFile bee = new WriteNewFile();		
+		
+		System.out.println("Enter file name for spellcheck.");
+		
+		String userFile = abc.next();
+		ArrayList<String> correctedWords = z.correctMis(userFile, "engDictionary.txt");
+	
+		bee.writeNewFileName(userFile, correctedWords);
 	
 	}
 }
