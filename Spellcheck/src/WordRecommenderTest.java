@@ -36,6 +36,7 @@ class WordRecommenderTest{
 		assertEquals("hello", wordsFromDictionary.get(0), "First word in dictionary");
 		
 	}
+
 	
 	@Test
 	void testFileCCreation() {
@@ -58,28 +59,8 @@ class WordRecommenderTest{
 		assertEquals(Sim, 2, "Sim works");
 	}
 	
-	void getSim2() {
-		WordRecommender a = new WordRecommender();
-		double Sim = a.getSimilarity("help", "hello");
-		assertEquals(Sim, 2, "Sim works");
-	}
 	
 	
-	void getSim4() {
-		WordRecommender a = new WordRecommender();
-		double Sim = a.getSimilarity("help", "hello");
-		assertEquals(Sim, 2, "Sim works");
-	}
-	void getSim5() {
-		WordRecommender a = new WordRecommender();
-		double Sim = a.getSimilarity("help", "hello");
-		assertEquals(Sim, 2, "Sim works");
-	}
-	void getSim6() {
-		WordRecommender a = new WordRecommender();
-		double Sim = a.getSimilarity("help", "hello");
-		assertEquals(Sim, 2, "Sim works");
-	}
 	
 
 	@Test
@@ -111,13 +92,39 @@ class WordRecommenderTest{
 		assertNotNull(words);
 	}
 	
+	@Test
+	void getWordS3() {
+		WordRecommender a = new WordRecommender();
+		a.createFileToCheck("usertocorrect.txt");
+		a.createDFile("testdictionary");
+		ArrayList<String> words = a.getWordSuggestions("hellp", 5, 0.8, 2);
+		assertNotNull(words);
+		ArrayList<String> words1 = a.getWordSuggestions("hellp", 3, 0.8, 2);
+		assertNotNull(words1);
+		ArrayList<String> words2 = a.getWordSuggestions("sleeepy", 3, 0.8, 2);
+		assertNotNull(words2);
+		ArrayList<String> words3 = a.getWordSuggestions("help", 3, 0.8, 2);
+		assertNotNull(words3);
+		ArrayList<String> words4 = a.getWordSuggestions("helpp", 3, 1, 2);
+		assertNotNull(words4);
+		ArrayList<String> words5 = a.getWordSuggestions("help", 3, 1, 2);
+		assertNotNull(words5);
+		ArrayList<String> words6 = a.getWordSuggestions("helpr", 4, 0, 2);
+		assertNotNull(words6);
+		ArrayList<String> words7 = a.getWordSuggestions("helpr", 1, 0, 2);
+		assertNotNull(words7);
+		ArrayList<String> words8 = a.getWordSuggestions("helpeeeeeeer", 1, 0, 2);
+		assertNotNull(words8);
+	}
+	
+	@Test
+	void getWord4() {
+		WordRecommender a = new WordRecommender();
+		a.createFileToCheck("usertocorrect.txt");
+		a.createDFile("testdictionary");
+		ArrayList<String> words = a.getWordSuggestions("hellp", 1, 0.8, 2);
+		assertNotNull(words);
+	}
 	
 	
-	
-	
-	
-	
-
-	
-
 }
