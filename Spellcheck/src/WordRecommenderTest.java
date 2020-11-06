@@ -1,3 +1,5 @@
+//Collaborators: Corey Parker, Daniel Xu
+
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.File;
@@ -16,12 +18,14 @@ class WordRecommenderTest{
 
 	@Test
 	void testInstance() {
+		//This will test if the object a is not null
 		WordRecommender a = new WordRecommender();
 		assertNotNull(a);
 	}
 	
 	@Test
 	void testFileCreation() {
+		//This is to check if the obj a is created and the dictionary exists, including the file to check
 		WordRecommender a = new WordRecommender();
 		assertNotNull(a);
 		wordsFromDictionary = a.createDFile("testdictionary");
@@ -31,6 +35,7 @@ class WordRecommenderTest{
 
 	@Test
 	void testFileDCreation() {
+		//Checks for obj creation and if the first word of the ArrayList from dictionary is "hello"
 		WordRecommender a = new WordRecommender();
 		wordsFromDictionary = a.createDFile("testdictionary");
 		assertEquals("hello", wordsFromDictionary.get(0), "First word in dictionary");
@@ -40,6 +45,7 @@ class WordRecommenderTest{
 	
 	@Test
 	void testFileCCreation() {
+		//Checks for obj creation and if the first word of the ArrayList from dictionary is "hellp"
 		WordRecommender a = new WordRecommender();
 		wordsFromUserFile = a.createFileToCheck("usertocorrect.txt");
 		assertEquals("hellp", wordsFromUserFile.get(0), "First word in file");
@@ -47,6 +53,7 @@ class WordRecommenderTest{
 	
 	@Test
 	void getSim1() {
+		//Checks if the getSimilarity method returns expected average of 3
 		WordRecommender a = new WordRecommender();
 		double Sim = a.getSimilarity("help", "hell");
 		assertEquals(3, Sim, "First word in file");
@@ -54,6 +61,7 @@ class WordRecommenderTest{
 	
 	@Test
 	void getSim3() {
+		//Checks if the getSimilarity method gives the actual average of 2
 		WordRecommender a = new WordRecommender();
 		double Sim = a.getSimilarity("help", "hello");
 		assertEquals(Sim, 2, "Sim works");
@@ -65,6 +73,7 @@ class WordRecommenderTest{
 
 	@Test
 	void print() {
+		// This checks for obj creation and also if the prints and toPrint is not null
 		WordRecommender a = new WordRecommender();
 		ArrayList<String> list =  new ArrayList <String>();
 		list.add("hi");
@@ -76,6 +85,7 @@ class WordRecommenderTest{
 	
 	@Test
 	void getWordS1() {
+		//This checks for the words compiled for suggestions are not null 
 		WordRecommender a = new WordRecommender();
 		a.createFileToCheck("usertocorrect.txt");
 		a.createDFile("testdictionary");
@@ -85,6 +95,7 @@ class WordRecommenderTest{
 	
 	@Test
 	void getWordS2() {
+		//This checks for the words are not null
 		WordRecommender a = new WordRecommender();
 		a.createFileToCheck("usertocorrect.txt");
 		a.createDFile("testdictionary");
@@ -94,6 +105,7 @@ class WordRecommenderTest{
 	
 	@Test
 	void getWordS3() {
+		//This repeated checks for all the words and see if they return the given words
 		WordRecommender a = new WordRecommender();
 		a.createFileToCheck("usertocorrect.txt");
 		a.createDFile("testdictionary");
@@ -119,6 +131,7 @@ class WordRecommenderTest{
 	
 	@Test
 	void getWord4() {
+		//This checks if for more words
 		WordRecommender a = new WordRecommender();
 		a.createFileToCheck("usertocorrect.txt");
 		a.createDFile("testdictionary");
