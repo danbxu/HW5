@@ -11,9 +11,11 @@ public class WordRecommenderTester {
 		System.out.println("Enter file name for spellcheck.");
 		
 		String userFile = abc.next();
+		//We wrote tester with the assumption that "engDictionary.txt" will be the main dictionary
 		ArrayList<String> correctedWords = z.correctMis(userFile, "engDictionary.txt");
 	
 		bee.writeNewFileName(userFile, correctedWords);
 	
 	}
+	
 }
