@@ -52,7 +52,30 @@ class WordRecommenderTest{
 	}
 	
 	@Test
+	void getSim3() {
+		WordRecommender a = new WordRecommender();
+		double Sim = a.getSimilarity("help", "hello");
+		assertEquals(Sim, 2, "Sim works");
+	}
+	
 	void getSim2() {
+		WordRecommender a = new WordRecommender();
+		double Sim = a.getSimilarity("help", "hello");
+		assertEquals(Sim, 2, "Sim works");
+	}
+	
+	
+	void getSim4() {
+		WordRecommender a = new WordRecommender();
+		double Sim = a.getSimilarity("help", "hello");
+		assertEquals(Sim, 2, "Sim works");
+	}
+	void getSim5() {
+		WordRecommender a = new WordRecommender();
+		double Sim = a.getSimilarity("help", "hello");
+		assertEquals(Sim, 2, "Sim works");
+	}
+	void getSim6() {
 		WordRecommender a = new WordRecommender();
 		double Sim = a.getSimilarity("help", "hello");
 		assertEquals(Sim, 2, "Sim works");
